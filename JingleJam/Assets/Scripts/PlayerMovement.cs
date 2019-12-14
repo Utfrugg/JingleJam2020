@@ -45,8 +45,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log($"Normal: {collision.GetContact(0).normal}");
-
             if (collision.GetContact(0).normal.y > 0.9f)
             {
                 grounded = true;
