@@ -40,10 +40,14 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Joink");
         if (collision.gameObject.CompareTag("Ground"))
         {
-            grounded = true;
+            Debug.Log($"Normal: {collision.GetContact(0).normal}");
+
+            if (collision.GetContact(0).normal.y > 0.9f)
+            {
+                grounded = true;
+            }
         }
     }
 }
