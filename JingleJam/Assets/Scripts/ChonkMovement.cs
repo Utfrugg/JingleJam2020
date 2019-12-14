@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class ChonkMovement : MonoBehaviour
 {
-    public float speed;
-    public float jumpPower = 10;
+    public float moveSpeed;
+    public float jumpPower = 10f;
     public Animator animator;
 
-    private bool grounded = true;
     private Rigidbody2D rigidbody;
-
-    
+    private float animSpeed;
+    private bool grounded = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +21,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        transform.position += movement * Time.deltaTime * moveSpeed;
+
         float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
+        animator.SetFloat("animSpeed", Mathf.Abs(hor));
 
-        animator.SetFloat("Speed", Mathf.Abs(hor));
-
-        Vector2 movement = new Vector2(hor, ver);
-
-        rigidbody.AddForce(new Vector2(movement.x * speed, 0), ForceMode2D.Impulse);
-
+        Jump();
         if (grounded)
         {
             if (Input.GetAxis("Jump") > 0.1f)
@@ -41,12 +37,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    void Jump() 
+    {
+        if (Input.GetButtonDown("Jump") && grounded == true)
+        {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 0f), ForceMode2D.Impulse);
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (collision.GetContact(0).normal.y > 0.9f)
+            if (collision.GetContact(0).normal.y > 0.7f)
             {
                 grounded = true;
             }
