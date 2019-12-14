@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public Animator animator;
 
     private bool grounded = true;
     private Rigidbody2D rigidbody;
@@ -23,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
+
+        animator.SetFloat("Speed", Mathf.Abs(hor));
 
         Vector2 movement = new Vector2(hor, ver);
 
