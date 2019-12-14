@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public float jumpPower = 10;
     public Animator animator;
 
     private bool grounded = true;
@@ -29,13 +30,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 movement = new Vector2(hor, ver);
 
-        rigidbody.AddForce(movement * speed);
+        rigidbody.AddForce(new Vector2(movement.x * speed, 0), ForceMode2D.Impulse);
 
         if (grounded)
         {
             if (Input.GetAxis("Jump") > 0.1f)
             {
-                rigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+                rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
                 grounded = false;
             }
         }
