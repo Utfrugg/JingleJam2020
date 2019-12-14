@@ -49,7 +49,7 @@ public class ChonkMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (collision.GetContact(0).normal.y > 0.9f)
+            if (collision.GetContact(0).normal.y > 0.7f)
             {
                 grounded = true;
             }
