@@ -1,19 +1,18 @@
-﻿Shader "Unlit/DitherShader"
+﻿
+
+Shader "Unlit/DitherShader"
 {
     Properties
     {
-		_Color1("Color", Color) = (1, 1, 1, 1)
-		_Color2("Color", Color) = (1, 1, 1, 1)
-		_Color3("Color", Color) = (1, 1, 1, 1)
-		_Color4("Color", Color) = (1, 1, 1, 1)
-		_Color5("Color", Color) = (1, 1, 1, 1)
-		_Color6("Color", Color) = (1, 1, 1, 1)
+		_Threshold("Threshold", float) = 0.8
+		_Modifier("Modifier", float) = 0.1
+		_Scale("Scale", float) = 0.5
 		_MainTex ("Texture", 2D) = "white" {}
     }
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" "Queue"="Transparent"}
         LOD 100
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -40,13 +39,11 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-			fixed4 _Color1;
-			fixed4 _Color2;
-			fixed4 _Color3;
-			fixed4 _Color4;
-			fixed4 _Color5;
-			fixed4 _Color6;
-			fixed4 Colours2[6];
+			const static int _ColourAmount = 30; // CHANGE THE PALETTE SIZE HERE PLEASE THANK YOU
+			float _Scale;
+			float _Modifier;
+			float _Threshold;
+			uniform fixed4 Colours[_ColourAmount];
 
             v2f vert (appdata v)
             {
@@ -80,15 +77,6 @@
 			}
 
 			fixed4 find_closest(fixed4 color)	{
-				fixed4 tempCol = color;
-							fixed4 Colours[6] = {
-			_Color1,
-			_Color2,
-			_Color3,
-			_Color4,
-			_Color5,
-			_Color6,
-			};
 				/*if (color.r < limit)
 				{
 					tempCol.r = 0.0;
@@ -107,12 +95,12 @@
 				fixed4 closestColor = (1, 1, 1, 1);
 				float minDelta = 9999999;
 
-				for (int i = 0; i < 6; i++) {
-					float deltaTest = length(abs(tempCol - Colours2[i]));
+				for (int i = 0; i < _ColourAmount; i++) {
+					float deltaTest = length(abs(color - Colours[i]));
 					if (deltaTest < minDelta)
 					{
 						minDelta = deltaTest;
-						closestColor = Colours2[i];
+						closestColor = Colours[i];
 					}
 				}
 				return closestColor;
@@ -121,22 +109,23 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-				float matx = i.vertex.x * 0.5 % 8;
-				float maty = i.vertex.y * 0.5 % 8;
+				float matx = i.vertex.x * _Scale % 8;
+				float maty = i.vertex.y * _Scale % 8;
 
-				fixed4 Threshold = (256 / 4, 256 / 4, 256 / 4, 0);
 
 				float factor = getLimit(matx, maty);
-				col.r += 0.1 * factor;
-				col.g += 0.1 * factor;
-				col.b += 0.1 * factor;
-				//col.r += find_closest(matx, maty, col.r) * ;
-				//col.r = _Colour;
-				//col.g += find_closest(matx, maty, col.g);
-				//col.b += find_closest(matx, maty, col.b);
+				if (factor > _Threshold) {
 
-				col.rgb = find_closest(col).rgb;
+					col.r += _Modifier * factor;
+					col.g += _Modifier * factor;
+					col.b += _Modifier * factor;
+					//col.r += find_closest(matx, maty, col.r) * ;
+					//col.r = _Colour;
+					//col.g += find_closest(matx, maty, col.g);
+					//col.b += find_closest(matx, maty, col.b);
 
+					col.rgb = find_closest(col).rgb;
+				}
 				//col = _Color1;
 				//col.a = 1.0;
 
