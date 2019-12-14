@@ -46,6 +46,7 @@
 			fixed4 _Color4;
 			fixed4 _Color5;
 			fixed4 _Color6;
+			fixed4 Colours2[6];
 
             v2f vert (appdata v)
             {
@@ -107,11 +108,11 @@
 				float minDelta = 9999999;
 
 				for (int i = 0; i < 6; i++) {
-					float deltaTest = length(abs(tempCol - Colours[i]));
+					float deltaTest = length(abs(tempCol - Colours2[i]));
 					if (deltaTest < minDelta)
 					{
 						minDelta = deltaTest;
-						closestColor = Colours[i];
+						closestColor = Colours2[i];
 					}
 				}
 				return closestColor;
