@@ -89,7 +89,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2209676356553596628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b9929e3f845b3438b9d4be1f3e2a9e, type: 3}
   m_Name: 
@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4529588204260653121}
   - component: {fileID: 4529588204260653122}
+  - component: {fileID: 2106279408}
   m_Layer: 5
   m_Name: maxchonk
   m_TagString: Untagged
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4529588204260653120}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -177,6 +178,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2106279408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529588204260653120}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b9929e3f845b3438b9d4be1f3e2a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlashTime: 0.3
+  TimeElapsed: 0
 --- !u!1 &4529588205410976627
 GameObject:
   m_ObjectHideFlags: 0
