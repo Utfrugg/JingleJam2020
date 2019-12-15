@@ -8,21 +8,12 @@ using Vector3 = System.Numerics.Vector3;
 public class Pickup : MonoBehaviour
 {
     public enum Type
-    { Default, Bird
+    {
+        Default,
+        Bird
     };
 
     public Type PickupType = Type.Default;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void SetInactive()
     {

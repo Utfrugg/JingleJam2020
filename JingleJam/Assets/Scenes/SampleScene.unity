@@ -8914,9 +8914,9 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!4 &2097913515
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2286338480552754372, guid: 10f0fd246555bc44897da911fafb091f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2286338482123344744}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097913513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
