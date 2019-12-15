@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelTestRaf.unity
     guid: f064b34f7dc3b704586662e106da4078
+  - enabled: 1
+    path: Assets/Scenes/ChonkDeath.unity
+    guid: feb4daa5cb0fef14db19e795db37dd1d
   m_configObjects: {}
