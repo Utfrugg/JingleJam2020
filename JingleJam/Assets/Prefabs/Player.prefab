@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2286338480552754371}
   - component: {fileID: 2286338480552754373}
   - component: {fileID: 2286338480552754370}
+  - component: {fileID: 5649102301066886235}
   - component: {fileID: 2286338480552754369}
   - component: {fileID: 2286338480552754375}
   m_Layer: 8
@@ -129,10 +130,26 @@ MonoBehaviour:
   pickupMask:
     serializedVersion: 2
     m_Bits: 1024
+  deathMask:
+    serializedVersion: 2
+    m_Bits: 2048
   horizontalRayCount: 4
   verticalRayCount: 4
   maxClimbAngle: 80
   maxDescendingAngle: 75
+--- !u!114 &5649102301066886235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286338480552754368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd742792fc881094ea3095a72cb37ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
 --- !u!114 &2286338480552754369
 MonoBehaviour:
   m_ObjectHideFlags: 0
