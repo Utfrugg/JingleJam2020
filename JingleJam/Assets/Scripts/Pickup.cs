@@ -11,7 +11,8 @@ public class Pickup : MonoBehaviour
     {
         Default,
         Bird,
-        Respawn
+        Respawn,
+        Tree
     };
 
     public Type PickupType = Type.Default;
