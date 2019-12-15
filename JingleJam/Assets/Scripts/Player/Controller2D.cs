@@ -31,7 +31,7 @@ public class Controller2D : MonoBehaviour
     private PickupHandler pickupHandler;
     private PlayerDeath deathHandler;
     private BoxCollider2D collider;
-    private Animator animator;
+    public Animator animator;
     private RaycastOrigins raycastOrigins;
 
     void Start()
@@ -67,6 +67,10 @@ public class Controller2D : MonoBehaviour
         if(collisions.below)
         {
             animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0.0f);
         }
 
         transform.Translate(velocity);

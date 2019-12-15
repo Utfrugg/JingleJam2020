@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
 
     private bool jump = false;
+    private bool isJumping = false;
     private float bounce = 0.0f;
 
     // Start is called before the first frame update
@@ -88,9 +89,22 @@ public class Player : MonoBehaviour
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        if (isJumping)
+        {
+            if (controller.collisions.below)
+            {
+                isJumping = false;
+                controller.animator.SetBool("OnGround", true);
+            }
+        }
+
+
         if (jump && controller.collisions.below)
         {
             velocity.y = jumpVelocity;
+            controller.animator.SetBool("Jump", true);
+            controller.animator.SetBool("OnGround", false);
+            isJumping = true;
         }
 
         if (controller.collisions.below)
@@ -134,6 +148,8 @@ public class Player : MonoBehaviour
 
 
         jump = false;
+        controller.animator.SetBool("Jump", false);
+
         velocity.x = input.x * moveSpeed;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, Mathf.FloorToInt(Chonk), jumpVelocity * Time.deltaTime);
