@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
-    public float jumpHeight = 4;
-    public float timeToHighestPoint = .4f;
-    public float moveSpeed = 6;
-
+    public float[] jumpHeights = new float[5];
+    float jumpHeight;
+    public float[] timeToHighestPoints = new float[5];
+    float timeToHighestPoint;
+    public float[] moveSpeeds = new float[5];
+    float moveSpeed;
+    public Sprite[] ChonkTextures = new Sprite[5];
+    public float Chonk;
     private Controller2D controller;
 
     private float jumpVelocity;
@@ -23,6 +28,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent<Controller2D>();
+        GetChonk(0);
+    }
+
+    public void GetChonk(float ChonkIncrease)
+    {
+        Chonk += ChonkIncrease;
+        int ChonkLevel = Mathf.FloorToInt(Chonk);
+        GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
+        GetComponentInParent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
+
+        jumpHeight = jumpHeights[ChonkLevel];
+        timeToHighestPoint = timeToHighestPoints[ChonkLevel];
+        moveSpeed = moveSpeeds[ChonkLevel];
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToHighestPoint, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToHighestPoint;
