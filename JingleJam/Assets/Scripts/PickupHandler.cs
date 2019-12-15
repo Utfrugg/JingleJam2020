@@ -15,6 +15,7 @@ public class PickupHandler : MonoBehaviour
         {
             case Pickup.Type.Bird:
                 Debug.Log("Hmm tasty bird");
+                GetComponentInParent<Player>().GetChonk(1);
                 break;
             default:
                     Debug.Log("Oopsie, no behaviour established for pickup");

@@ -7,6 +7,7 @@ Shader "Unlit/DitherShader"
 		_Threshold("Threshold", float) = 0.8
 		_Modifier("Modifier", float) = 0.1
 		_Scale("Scale", float) = 0.5
+		_UsePallete("Use Palette", int) = 1
 		_MainTex ("Texture", 2D) = "white" {}
     }
 
@@ -43,6 +44,7 @@ Shader "Unlit/DitherShader"
 			float _Scale;
 			float _Modifier;
 			float _Threshold;
+			int _UsePalette;
 			uniform fixed4 Colours[_ColourAmount];
 
             v2f vert (appdata v)
@@ -115,15 +117,17 @@ Shader "Unlit/DitherShader"
 
 				float factor = getLimit(matx, maty);
 				if (factor > _Threshold) {
-
+					if (factor > col.r)
 					col.r += _Modifier * factor;
+					if (factor > col.g)
 					col.g += _Modifier * factor;
+					if (factor > col.b)
 					col.b += _Modifier * factor;
 					//col.r += find_closest(matx, maty, col.r) * ;
 					//col.r = _Colour;
 					//col.g += find_closest(matx, maty, col.g);
 					//col.b += find_closest(matx, maty, col.b);
-
+					
 					col.rgb = find_closest(col).rgb;
 				}
 				//col = _Color1;
