@@ -23,6 +23,8 @@ public class Controller2D : MonoBehaviour
 
     public CollisionInfo collisions;
 
+
+
     private float horizontalRaySpacing;
     private float verticalRaySpacing;
 
@@ -41,7 +43,7 @@ public class Controller2D : MonoBehaviour
         CalculateRaySpacing();
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 velocity, int bounceLevel, float jump)
     {
         UpdateRaycastOrigins();
         collisions.Reset();

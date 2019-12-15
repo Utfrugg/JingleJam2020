@@ -20,11 +20,12 @@ public class Player : MonoBehaviour
     public Animator animator;
 
     private float jumpVelocity;
-    
+    private float verticalMomentum = 0.0f;
     private float gravity;
     private Vector3 velocity;
 
     private bool jump = false;
+    private float bounce = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,9 @@ public class Player : MonoBehaviour
     {
         Chonk += ChonkIncrease;
         int ChonkLevel = Mathf.FloorToInt(Chonk);
+        ChonkLevel = Mathf.Min(ChonkLevel, 4);
+
+        Debug.Log(ChonkLevel);
        // GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
         //GetComponentInParent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
 
@@ -55,6 +59,23 @@ public class Player : MonoBehaviour
         {
             jump = true;
         }
+
+        if (controller.collisions.below)
+        {
+            verticalMomentum = 0.0f;
+        }
+        else
+        {
+            verticalMomentum += Time.deltaTime;
+        }
+
+        if (verticalMomentum > timeToHighestPoint * 2 && Mathf.FloorToInt(Chonk) > 0)
+        {
+            if (bounce < 0.2f)
+            {
+                bounce = 1.0f;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -69,13 +90,52 @@ public class Player : MonoBehaviour
 
         if (jump && controller.collisions.below)
         {
-
-            Debug.Log("Joink");
             velocity.y = jumpVelocity;
         }
+
+        if (controller.collisions.below)
+        {
+            if (bounce > 0.1f)
+            {
+                float bounceLevel = 0.0f;
+                switch (Mathf.Min(Mathf.FloorToInt(Chonk), 4))
+                {
+                    case 2:
+                    {
+                        bounceLevel = 0.8f;
+                        break;
+                    }
+                    case 3:
+                    {
+                        bounceLevel = 1.5f;
+                        break;
+                    }
+                    case 4:
+                    {
+                        bounceLevel = 2.0f;
+                        break;
+                    }
+                    default:
+                    {
+                        bounceLevel = 0.0f;
+                        break;
+                    }
+                }
+
+
+                velocity.y = jumpVelocity * bounce * bounceLevel;
+                bounce *= 0.5f;
+            }
+            else
+            {
+                bounce = 0.0f;
+            }
+        }
+
+
         jump = false;
         velocity.x = input.x * moveSpeed;
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime, Mathf.FloorToInt(Chonk), jumpVelocity * Time.deltaTime);
     }
 }
