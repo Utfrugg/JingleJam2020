@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float timeToHighestPoint = .4f;
     public float moveSpeed = 6;
 
+    public Transform respawnPoint;
+
     private Controller2D controller;
 
     private float jumpVelocity;
@@ -57,5 +59,10 @@ public class Player : MonoBehaviour
         velocity.x = input.x * moveSpeed;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void Respawn()
+    {
+        transform.position = respawnPoint.position;
     }
 }
