@@ -59,6 +59,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
+            controller.animator.SetBool("Jump", true);
+            controller.animator.SetBool("OnGround", false);
+        }
+
+        if (isJumping)
+        {
+            if (controller.collisions.below)
+            {
+                isJumping = false;
+                controller.animator.SetBool("OnGround", true);
+            }
         }
 
         if (controller.collisions.below)
@@ -89,21 +100,14 @@ public class Player : MonoBehaviour
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (isJumping)
-        {
-            if (controller.collisions.below)
-            {
-                isJumping = false;
-                controller.animator.SetBool("OnGround", true);
-            }
-        }
+
 
 
         if (jump && controller.collisions.below)
         {
             velocity.y = jumpVelocity;
-            controller.animator.SetBool("Jump", true);
-            controller.animator.SetBool("OnGround", false);
+            
+            
             isJumping = true;
         }
 
