@@ -9,18 +9,6 @@ public class PickupHandler : MonoBehaviour
 {
     public List<Pickup> pickups = new List<Pickup>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void ProcessPickup(Pickup pickup)
     {
         switch (pickup.PickupType)
@@ -32,18 +20,13 @@ public class PickupHandler : MonoBehaviour
                     Debug.Log("Oopsie, no behaviour established for pickup");
                 break;
         }
-
-        ;
-
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public void AddPickup(Pickup pickup)
     {
-        if (collision.gameObject.TryGetComponent(out Pickup newPickup)) {
-            pickups.Add(newPickup);
-            newPickup.SetInactive();
-            newPickup.enabled = false;
-            ProcessPickup(newPickup);
-        }
+        pickups.Add(pickup);
+        pickup.SetInactive();
+        pickup.enabled = false;
+        ProcessPickup(pickup);
     }
 }
