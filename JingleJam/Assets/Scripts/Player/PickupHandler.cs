@@ -35,7 +35,11 @@ public class PickupHandler : MonoBehaviour
   
                 }
                 if (GetComponentInParent<Player>().Chonk > 0)
-                    puke.Play();
+                {
+                     puke.enableEmission = true;
+                     puke.Play();
+                }
+                   
                 GetComponentInParent<Player>().Chonk = 0;
                 GetComponentInParent<Player>().GetChonk(0);
                 break;
