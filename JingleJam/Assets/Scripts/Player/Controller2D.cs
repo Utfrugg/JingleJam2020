@@ -5,13 +5,11 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(PickupHandler))]
 public class Controller2D : MonoBehaviour
 {
     private const float skinWidth = 0.015f;
 
     public LayerMask collisionMask;
-    public LayerMask pickupMask;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 
@@ -23,14 +21,12 @@ public class Controller2D : MonoBehaviour
     private float horizontalRaySpacing;
     private float verticalRaySpacing;
 
-    private PickupHandler pickupHandler;
     private BoxCollider2D collider;
     private RaycastOrigins raycastOrigins;
 
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
-        pickupHandler = GetComponent<PickupHandler>();
         CalculateRaySpacing();
     }
 
@@ -96,9 +92,6 @@ public class Controller2D : MonoBehaviour
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-
-            //Pickups
-            HandlePickups(Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, pickupMask));
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
@@ -234,14 +227,6 @@ public class Controller2D : MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    void HandlePickups(RaycastHit2D hit)
-    {
-        if (hit)
-        {
-            pickupHandler.AddPickup(hit.collider.gameObject.GetComponent<Pickup>());
         }
     }
 
