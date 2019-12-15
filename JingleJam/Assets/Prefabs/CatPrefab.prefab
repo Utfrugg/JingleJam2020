@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd742792fc881094ea3095a72cb37ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
+  deathY: -15
+  endingY: 75
+  respawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6080445094930293122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,11 +104,11 @@ MonoBehaviour:
   - 7
   - 6
   ChonkTextures:
-  - {fileID: 21300000, guid: d5334597f64e58a4184ce0fca7353c5b, type: 3}
-  - {fileID: 21300000, guid: cf037a24d63257e4f97bf106b72ed7a4, type: 3}
-  - {fileID: 21300000, guid: 49059605996fceb44b8fcc4278589652, type: 3}
-  - {fileID: 21300000, guid: 5338954533e2dcb498406b0141597c71, type: 3}
-  - {fileID: 21300000, guid: 8133191a5d22c754e9a4145d00483e41, type: 3}
+  - {fileID: -2182511376648174346, guid: 68974bca83b01b64da630fc6203f6052, type: 3}
+  - {fileID: 21300000, guid: 5678953be8bfea04ba06c8d2e39662be, type: 3}
+  - {fileID: 21300000, guid: cbab1310c5aee0e489fa8effa8d37286, type: 3}
+  - {fileID: 21300000, guid: 4bc29c77a5196294b9e3ce04c1ba66c9, type: 3}
+  - {fileID: 21300000, guid: e333355356fd9f74aa41a707e4534af7, type: 3}
   Chonk: 0
   animator: {fileID: 0}
 --- !u!114 &7648337115616457806
@@ -134,6 +136,19 @@ MonoBehaviour:
   verticalRayCount: 4
   maxClimbAngle: 80
   maxDescendingAngle: 75
+  animator: {fileID: 0}
+--- !u!114 &1650807117000533921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813497891215711659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115c24679e926974f9c6f28a94573623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8465131399825478266
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -48.629
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432967127425539665, guid: 68974bca83b01b64da630fc6203f6052,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 905704604822352965, guid: 68974bca83b01b64da630fc6203f6052,
         type: 3}

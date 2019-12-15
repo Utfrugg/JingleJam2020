@@ -23,13 +23,15 @@ public class Controller2D : MonoBehaviour
 
     public CollisionInfo collisions;
 
+
+
     private float horizontalRaySpacing;
     private float verticalRaySpacing;
 
     private PickupHandler pickupHandler;
     private PlayerDeath deathHandler;
     private BoxCollider2D collider;
-    private Animator animator;
+    public Animator animator;
     private RaycastOrigins raycastOrigins;
 
     void Start()
@@ -41,7 +43,7 @@ public class Controller2D : MonoBehaviour
         CalculateRaySpacing();
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 velocity, int bounceLevel, float jump)
     {
         UpdateRaycastOrigins();
         collisions.Reset();
@@ -65,6 +67,10 @@ public class Controller2D : MonoBehaviour
         if(collisions.below)
         {
             animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0.0f);
         }
 
         transform.Translate(velocity);
