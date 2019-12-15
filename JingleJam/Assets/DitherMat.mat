@@ -76,16 +76,17 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _Modifier: 0.1
+    - _Modifier: 0.06
     - _OcclusionStrength: 1
     - _PaletteHeight: 128
     - _Parallax: 0.02
-    - _Scale: 0.5
+    - _Scale: 0.59
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Threshold: 0.75
+    - _Threshold: 0.91
     - _UVSec: 0
+    - _UsePallete: 1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.9811321, g: 0.16197933, b: 0.16197933, a: 1}
