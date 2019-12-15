@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd742792fc881094ea3095a72cb37ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
+  deathY: -15
+  endingY: 75
+  respawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6080445094930293122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +136,7 @@ MonoBehaviour:
   verticalRayCount: 4
   maxClimbAngle: 80
   maxDescendingAngle: 75
+  animator: {fileID: 0}
 --- !u!1 &8465131399825478266
 GameObject:
   m_ObjectHideFlags: 0
