@@ -16,4 +16,12 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            PlayGame();
+        }
+    }
+
 }
