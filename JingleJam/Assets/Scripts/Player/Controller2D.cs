@@ -6,12 +6,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(PickupHandler))]
+[RequireComponent(typeof(PlayerDeath))]
 public class Controller2D : MonoBehaviour
 {
     private const float skinWidth = 0.015f;
 
     public LayerMask collisionMask;
     public LayerMask pickupMask;
+    public LayerMask deathMask;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 
@@ -24,6 +26,7 @@ public class Controller2D : MonoBehaviour
     private float verticalRaySpacing;
 
     private PickupHandler pickupHandler;
+    private PlayerDeath deathHandler;
     private BoxCollider2D collider;
     private RaycastOrigins raycastOrigins;
 
@@ -31,6 +34,7 @@ public class Controller2D : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         pickupHandler = GetComponent<PickupHandler>();
+        deathHandler = GetComponent<PlayerDeath>();
         CalculateRaySpacing();
     }
 
@@ -100,6 +104,9 @@ public class Controller2D : MonoBehaviour
             //Pickups
             HandlePickups(Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, pickupMask));
 
+            //Death
+            HandleDeath(Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, deathMask));
+
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             if (hit)
@@ -153,6 +160,12 @@ public class Controller2D : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
+
+            //Pickups
+            HandlePickups(Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, pickupMask));
+
+            //Death
+            HandleDeath(Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, deathMask));
 
             if (hit)
             {
@@ -242,6 +255,14 @@ public class Controller2D : MonoBehaviour
         if (hit)
         {
             pickupHandler.AddPickup(hit.collider.gameObject.GetComponent<Pickup>());
+        }
+    }
+
+    void HandleDeath(RaycastHit2D hit)
+    {
+        if (hit)
+        {
+            deathHandler.Respawn();
         }
     }
 
