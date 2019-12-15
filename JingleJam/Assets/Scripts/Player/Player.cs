@@ -42,8 +42,9 @@ public class Player : MonoBehaviour
         ChonkLevel = Mathf.Min(ChonkLevel, 4);
 
         Debug.Log(ChonkLevel);
-       // GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
-        //GetComponentInParent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
+        gameObject.transform.Find("cat_body").GetComponent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
+        // GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
+        gameObject.transform.Find("cat_body").GetComponent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
 
         jumpHeight = jumpHeights[ChonkLevel];
         timeToHighestPoint = timeToHighestPoints[ChonkLevel];
