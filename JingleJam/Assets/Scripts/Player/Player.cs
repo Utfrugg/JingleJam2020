@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     private bool jump = false;
     private bool isJumping = false;
+
+    private bool maxChonk = false;
     private float bounce = 0.0f;
 
     // Start is called before the first frame update
@@ -38,6 +40,11 @@ public class Player : MonoBehaviour
     public void GetChonk(float ChonkIncrease)
     {
         Chonk += ChonkIncrease;
+        if (Chonk >= 6.0f)
+        {
+            maxChonk = true;
+        }
+
         int ChonkLevel = Mathf.FloorToInt(Chonk);
         ChonkLevel = Mathf.Min(ChonkLevel, 4);
 
@@ -82,13 +89,21 @@ public class Player : MonoBehaviour
             verticalMomentum += Time.deltaTime;
         }
 
-        if (verticalMomentum > timeToHighestPoint * 2 && Mathf.FloorToInt(Chonk) > 0)
+        if (!maxChonk)
         {
-            if (bounce < 0.2f)
+            if (verticalMomentum > timeToHighestPoint * 2 && Mathf.FloorToInt(Chonk) > 0)
             {
-                bounce = 1.0f;
+                if (bounce < 0.2f)
+                {
+                    bounce = 1.0f;
+                }
             }
         }
+        else
+        {
+            bounce = 2f;
+        }
+
     }
 
     // Update is called once per frame
