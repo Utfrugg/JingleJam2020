@@ -7,6 +7,7 @@ using Debug = UnityEngine.Debug;
 
 public class PickupHandler : MonoBehaviour
 {
+    public ParticleSystem puke;
     public Transform deadbird;
     public List<Pickup> pickups = new List<Pickup>();
 
@@ -34,6 +35,7 @@ public class PickupHandler : MonoBehaviour
   
                 }
                 if (GetComponentInParent<Player>().Chonk > 0)
+                    puke.Play();
                 GetComponentInParent<Player>().Chonk = 0;
                 GetComponentInParent<Player>().GetChonk(0);
                 break;
