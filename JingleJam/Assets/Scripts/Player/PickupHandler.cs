@@ -17,6 +17,10 @@ public class PickupHandler : MonoBehaviour
                 Debug.Log("Hmm tasty bird");
                 GetComponentInParent<Player>().GetChonk(1);
                 break;
+            case Pickup.Type.Respawn:
+                Debug.Log("Fucked up");
+                GetComponentInParent<PlayerDeath>().SetRespawn(pickup.GetComponent<Transform>().position);
+                break;
             default:
                     Debug.Log("Oopsie, no behaviour established for pickup");
                 break;

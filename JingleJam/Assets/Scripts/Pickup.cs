@@ -10,7 +10,8 @@ public class Pickup : MonoBehaviour
     public enum Type
     {
         Default,
-        Bird
+        Bird,
+        Respawn
     };
 
     public Type PickupType = Type.Default;
