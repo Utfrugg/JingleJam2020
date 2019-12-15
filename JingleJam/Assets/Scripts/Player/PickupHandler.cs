@@ -8,6 +8,7 @@ using Debug = UnityEngine.Debug;
 public class PickupHandler : MonoBehaviour
 {
     public Transform maxChonkText;
+    public Transform winText;
     public ParticleSystem puke;
     public Transform deadbird;
     public List<Pickup> pickups = new List<Pickup>();
@@ -45,7 +46,9 @@ public class PickupHandler : MonoBehaviour
                      puke.enableEmission = true;
                      puke.Play();
                 }
-                   
+
+                winText.GetComponent<SpriteRenderer>().enabled = true;
+                winText.GetComponent<TextFlash>().enabled = true;
                 GetComponentInParent<Player>().Chonk = 0;
                 GetComponentInParent<Player>().GetChonk(0);
                 break;
