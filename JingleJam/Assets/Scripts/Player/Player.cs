@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float Chonk;
     private Controller2D controller;
 
+    public bool facingRight = true;
+
     public Animator animator;
 
     private float jumpVelocity;
@@ -101,7 +103,8 @@ public class Player : MonoBehaviour
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-
+        if (input.x < 0 && facingRight) Flip();
+        if (input.x > 0 && !facingRight) Flip();
 
 
         if (jump && controller.collisions.below)
@@ -158,5 +161,13 @@ public class Player : MonoBehaviour
         velocity.x = input.x * moveSpeed;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, Mathf.FloorToInt(Chonk), jumpVelocity * Time.deltaTime);
+    }
+
+    void Flip ()
+    {
+        facingRight = !facingRight;
+        var scale = this.gameObject.transform.localScale;
+        scale.Set(facingRight ? 1 : -1, 1, 1);
+        this.gameObject.transform.localScale = scale;
     }
 }
