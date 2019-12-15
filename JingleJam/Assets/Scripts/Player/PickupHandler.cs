@@ -7,6 +7,7 @@ using Debug = UnityEngine.Debug;
 
 public class PickupHandler : MonoBehaviour
 {
+    public Transform maxChonkText;
     public ParticleSystem puke;
     public Transform deadbird;
     public List<Pickup> pickups = new List<Pickup>();
@@ -20,6 +21,11 @@ public class PickupHandler : MonoBehaviour
                 GetComponentInParent<Player>().GetChonk(1);
                 pickup.SetInactive();
                 pickup.enabled = false;
+                if (GetComponentInParent<Player>().Chonk >= 4)
+                {
+                    maxChonkText.GetComponent<SpriteRenderer>().enabled = true;
+                    maxChonkText.GetComponent<TextFlash>().enabled = true;
+                }
                 break;
             case Pickup.Type.Respawn:
                 Debug.Log("Fucked up");
