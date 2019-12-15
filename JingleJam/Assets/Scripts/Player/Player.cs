@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float Chonk;
     private Controller2D controller;
 
+    public Animator animator;
+
     private float jumpVelocity;
     
     private float gravity;
@@ -35,8 +37,8 @@ public class Player : MonoBehaviour
     {
         Chonk += ChonkIncrease;
         int ChonkLevel = Mathf.FloorToInt(Chonk);
-        GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
-        GetComponentInParent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
+       // GetComponentInParent<SpriteRenderer>().sprite = ChonkTextures[ChonkLevel];
+        //GetComponentInParent<SpriteRenderer>().material.SetTexture("_MainTex", ChonkTextures[ChonkLevel].texture);
 
         jumpHeight = jumpHeights[ChonkLevel];
         timeToHighestPoint = timeToHighestPoints[ChonkLevel];

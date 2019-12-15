@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(PickupHandler))]
 [RequireComponent(typeof(PlayerDeath))]
+[RequireComponent(typeof(Animator))]
 public class Controller2D : MonoBehaviour
 {
     private const float skinWidth = 0.015f;
@@ -28,6 +29,7 @@ public class Controller2D : MonoBehaviour
     private PickupHandler pickupHandler;
     private PlayerDeath deathHandler;
     private BoxCollider2D collider;
+    private Animator animator;
     private RaycastOrigins raycastOrigins;
 
     void Start()
@@ -35,6 +37,7 @@ public class Controller2D : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         pickupHandler = GetComponent<PickupHandler>();
         deathHandler = GetComponent<PlayerDeath>();
+        animator = GetComponent<Animator>();
         CalculateRaySpacing();
     }
 
@@ -59,6 +62,10 @@ public class Controller2D : MonoBehaviour
             VerticalCollisions(ref velocity);
         }
         
+        if(collisions.below)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+        }
 
         transform.Translate(velocity);
     }
@@ -145,6 +152,8 @@ public class Controller2D : MonoBehaviour
                 }
 
             }
+
+
         }
     }
 
