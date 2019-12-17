@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     float timeToHighestPoint;
     public float[] moveSpeeds = new float[5];
     float moveSpeed;
-    public Sprite[] ChonkTextures = new Sprite[5];
+    public Sprite[] ChonkTextures = new Sprite[6];
     public float Chonk;
     private Controller2D controller;
 
@@ -41,12 +41,6 @@ public class Player : MonoBehaviour
 
     public void GetChonk(float ChonkIncrease)
     {
-        Chonk += ChonkIncrease;
-        if (Chonk >= 6.0f)
-        {
-            maxChonk = true;
-        }
-
         int ChonkLevel = Mathf.FloorToInt(Chonk);
         ChonkLevel = Mathf.Min(ChonkLevel, 4);
 
@@ -61,6 +55,13 @@ public class Player : MonoBehaviour
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToHighestPoint, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToHighestPoint;
+
+        Chonk += ChonkIncrease;
+        if (Chonk >= 5.0f)
+        {
+            maxChonk = true;
+            gameObject.transform.Find("cat_body").GetComponent<SpriteRenderer>().sprite = ChonkTextures[5];
+        }
     }
 
 
@@ -104,6 +105,8 @@ public class Player : MonoBehaviour
         else
         {
             bounce = 2f;
+            if (transform.position.y > 30)
+                gravity = 0.0f;
         }
 
     }

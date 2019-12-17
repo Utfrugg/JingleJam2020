@@ -38,7 +38,7 @@ public class PickupHandler : MonoBehaviour
                 Debug.Log("Deliver");
                 for (int i = 0; i < GetComponentInParent<Player>().Chonk; i++)
                 {
-                    Instantiate(deadbird, gameObject.transform.Find("cat_head").gameObject.transform.position, Quaternion.identity);
+                    Instantiate(deadbird, gameObject.transform.Find("cat_head").gameObject.transform.position + new Vector3 (0,0,-4), Quaternion.identity);
   
                 }
                 if (GetComponentInParent<Player>().Chonk > 0)
@@ -46,9 +46,9 @@ public class PickupHandler : MonoBehaviour
                      puke.enableEmission = true;
                      puke.Play();
                 }
-
+                maxChonkText.GetComponent<SpriteRenderer>().enabled = false;
+                maxChonkText.GetComponent<TextFlash>().enabled = false;
                 winText.GetComponent<SpriteRenderer>().enabled = true;
-                winText.GetComponent<TextFlash>().enabled = true;
                 GetComponentInParent<Player>().Chonk = 0;
                 GetComponentInParent<Player>().GetChonk(0);
                 break;

@@ -20,10 +20,16 @@ public class PlayerDeath : MonoBehaviour
     public void Update()
     {
         if (trans.position.y < deathY)
-            Respawn();
+        {
+            SceneManager.LoadScene("ChonkDeath");
+            Debug.Log("asd");
+        }
 
         if (trans.position.y > endingY)
+        {
             SceneManager.LoadScene("ChonkDeath");
+            Debug.Log("asd");
+        }
     }
 
     public void SetRespawn(Vector3 newPos)

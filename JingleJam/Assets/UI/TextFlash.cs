@@ -20,7 +20,6 @@ public class TextFlash : MonoBehaviour
         if (TimeElapsed > FlashTime) {
             TimeElapsed = 0;
             render.enabled = !render.enabled;
-
         }
     }
 }

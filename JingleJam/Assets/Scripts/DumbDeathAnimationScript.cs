@@ -6,6 +6,7 @@ public class DumbDeathAnimationScript : MonoBehaviour
 {
     Transform trans;
     float launchSpeed = 10;
+    public Transform thingwithbounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,6 @@ public class DumbDeathAnimationScript : MonoBehaviour
         trans.position += transvec;
 
         if (trans.position.x > 15)
-            trans.position -= new Vector3(30, 0, 0);
+            trans.position -= new Vector3(thingwithbounds.GetComponent<SpriteRenderer>().bounds.size.x, 0);
     }
 }
