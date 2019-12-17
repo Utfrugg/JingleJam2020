@@ -21,14 +21,12 @@ public class PlayerDeath : MonoBehaviour
     {
         if (trans.position.y < deathY)
         {
-            SceneManager.LoadScene("ChonkDeath");
-            Debug.Log("asd");
+            Respawn();
         }
 
         if (trans.position.y > endingY)
         {
             SceneManager.LoadScene("ChonkDeath");
-            Debug.Log("asd");
         }
     }
 
@@ -39,7 +37,6 @@ public class PlayerDeath : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("AAAA");
         gameObject.transform.position = respawnPoint;
     }
 }
