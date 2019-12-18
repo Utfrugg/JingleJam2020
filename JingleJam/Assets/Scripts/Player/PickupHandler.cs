@@ -48,7 +48,7 @@ public class PickupHandler : MonoBehaviour
                 }
                 maxChonkText.GetComponent<SpriteRenderer>().enabled = false;
                 maxChonkText.GetComponent<TextFlash>().enabled = false;
-                winText.GetComponent<SpriteRenderer>().enabled = true;
+                winText.gameObject.SetActive(true);
                 GetComponentInParent<Player>().Chonk = 0;
                 GetComponentInParent<Player>().GetChonk(0);
                 break;
